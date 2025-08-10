@@ -1,11 +1,15 @@
 # Ignore build, install, and log directories anywhere in the workspace
-build/
-install/
-log/
+**/build/
+**/install/
+**/log/
 logs/
 devel/
 devel_isolated/
 build_isolated/
+
+**/.vscode/
+**/__pycache__/
+
 
 # Ignore all generated files in any subdirectory
 bin/

@@ -9,6 +9,7 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 
+
 add_executable(temperature_subscriber_node ../../workspaces/temperature_subscriber_ws/src/temperature_subscriber_node.cpp)
 ament_target_dependencies(temperature_subscriber_node rclcpp std_msgs)
 
