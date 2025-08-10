@@ -1,4 +1,2 @@
 .vscode/
 __pycache__/
-workspaces/temperature_publisher_ws/
-workspaces/temperature_subscriber_ws/
