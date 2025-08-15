@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
 import rclpy
-from rclpy.node import Node
-from std_msgs.msg import String  
+from rclpy.node import Node 
+from temperature_monitoring_interfaces.msg import TemperatureData 
  
 class TemperaturePublisherNode(Node): 
     def __init__(self):
         super().__init__("temperature_publisher_node")
-        self.publisher_ = self.create_publisher(String, 'temperature', 10)
+        self.publisher_ = self.create_publisher(TemperatureData, 'temperature', 10)
         self.timer = self.create_timer(1.0, self.publish_temperature)
         self.get_logger().info("Publisher Node has been started")
 
     def publish_temperature(self):
-        msg = String()
-        msg.data = "25.0" # Example temperature value
+        msg = TemperatureData()
+        msg.temperature = 26.0 # Example temperature value
         self.publisher_.publish(msg)
-        self.get_logger().info(f'Publishing: "{msg.data}"')
+        self.get_logger().info(f'Publishing: "{msg.temperature}"')
  
  
 def main(args=None):

@@ -8,10 +8,11 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(temperature_monitoring_interfaces REQUIRED)
 
 
 add_executable(temperature_subscriber_node ../../workspaces/temperature_subscriber_ws/src/temperature_subscriber_node.cpp)
-ament_target_dependencies(temperature_subscriber_node rclcpp std_msgs)
+ament_target_dependencies(temperature_subscriber_node rclcpp temperature_monitoring_interfaces)
 
 install(TARGETS temperature_subscriber_node
   DESTINATION lib/${PROJECT_NAME})
