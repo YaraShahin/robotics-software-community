@@ -4,7 +4,8 @@
   <name>temperature_publisher</name>
   <version>0.1.0</version>
   <description>TODO: Package description</description>
-  <maintainer email="">TODO:</maintainer>
+  <maintainer email="TODO@gmail.com">TODO:</maintainer>
+  <license>Apache-2.0</license>
 
   <exec_depend>temperature_monitoring_interfaces</exec_depend>
 

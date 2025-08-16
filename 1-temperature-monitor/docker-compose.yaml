@@ -1,0 +1,37 @@
+x-temperature-monitoring-service: &temperature-monitoring-service
+  image: ros2-humble-temperature-monitoring-dev
+  networks:
+    - temperature-monitoring-network
+  entrypoint: ["/bin/bash"]
+  tty: true
+  stdin_open: true
+  environment:
+    - DEBIAN_FRONTEND=noninteractive
+    - ROS_DOMAIN_ID=33
+
+services:
+  temperature_publisher:
+    <<: *temperature-monitoring-service
+    build:
+      context: .
+      args:
+        ws_name: temperature_publisher_ws/
+    container_name: temperature_publisher
+    volumes:
+      - ./workspaces/temperature_publisher_ws:/root/temperature_publisher_ws:rw
+      - ./packages:/root/temperature_publisher_ws/src:r
+
+  temperature_subscriber:
+    <<: *temperature-monitoring-service
+    build:
+      context: .
+      args:
+        ws_name: temperature_subscriber_ws/
+    container_name: temperature_subscriber
+    volumes:
+      - ./workspaces/temperature_subscriber_ws:/root/temperature_subscriber_ws:rw
+      - ./packages:/root/temperature_subscriber_ws/src:r
+
+networks:
+  temperature-monitoring-network:
+    driver: bridge

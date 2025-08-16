@@ -1,0 +1,38 @@
+# Variables
+PUBLISHER_CONTAINER := "temperature_publisher"
+SUBSCRIBER_CONTAINER := "temperature_subscriber"
+PUBLISHER_WS_SRC := "workspaces/temperature_publisher_ws/src"
+SUBSCRIBER_WS_SRC := "workspaces/temperature_subscriber_ws/src"
+
+# Command: Setup the project
+# Note: in symlink command, you must give always the FULL PATH not relative
+setup-project:
+    mkdir -p $PWD/{{PUBLISHER_WS_SRC}}
+
+    mkdir -p $PWD/{{SUBSCRIBER_WS_SRC}}
+
+    docker compose up -d --build
+
+    docker compose exec {{PUBLISHER_CONTAINER}} bash -c "\
+        cd /root/temperature_publisher_ws && \
+        rosdep update && \
+        rosdep install --from-paths src --ignore-src -r -y && \
+        colcon build --symlink-install && \
+        source install/setup.bash \
+    "
+
+    docker compose exec {{SUBSCRIBER_CONTAINER}} bash -c "\
+        cd /root/temperature_subscriber_ws && \
+        rosdep update && \
+        rosdep install --from-paths src --ignore-src -r -y && \
+        colcon build --symlink-install && \
+        source install/setup.bash \
+    "
+
+# Command: Open publisher container shell
+run-publisher:
+    docker compose exec {{PUBLISHER_CONTAINER}} bash
+
+# Command: Open subscriber container shell
+run-subscriber:
+    docker compose exec {{SUBSCRIBER_CONTAINER}} bash

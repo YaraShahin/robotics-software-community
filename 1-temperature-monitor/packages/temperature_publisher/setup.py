@@ -13,7 +13,7 @@ setup(
     install_requires=["setuptools"],
     zip_safe=True,
     maintainer="TODO:",
-    maintainer_email="TODO:",
+    maintainer_email="yarashahinstem@gmail.com", #TODO
     description="TODO: Package description",
     tests_require=["pytest"],
     entry_points={
