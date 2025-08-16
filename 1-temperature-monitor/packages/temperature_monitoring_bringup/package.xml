@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>temperature_monitoring_bringup</name>
+  <version>0.1.0</version>
+
+  <description>Temperature Monitoring Application Launch Files</description>
+  <maintainer email="yarashahinstem@gmail.com">Yara Shahin</maintainer>
+  <maintainer email="mahmoud3taha@gmail.com">Mahmoud Taha</maintainer>
+
+  <license>Mozilla Public License 2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <exec_depend>temperature_publisher</exec_depend>
+  <exec_depend>temperature_subscriber</exec_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
