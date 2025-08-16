@@ -4,6 +4,7 @@
   <name>temperature_monitoring_interfaces</name>
   <version>0.0.0</version>
   <description>Messages, Services and Actions for temperature monitoring.</description>
+  <license>Apache-2.0</license>
 
   <maintainer email="yarashahinstem@gmail.com">Yara Shahin</maintainer>
   <maintainer email="mahmoud3taha@gmail.com">Taha</maintainer>
