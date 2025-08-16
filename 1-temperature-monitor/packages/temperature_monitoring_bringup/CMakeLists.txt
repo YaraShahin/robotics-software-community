@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(temperature_subscriber)
+project(temperature_monitoring_bringup)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -7,15 +7,13 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(rclcpp REQUIRED)
-find_package(temperature_monitoring_interfaces REQUIRED)
+# uncomment the following section in order to fill in
+# further dependencies manually.
+# find_package(<dependency> REQUIRED)
 
-
-add_executable(temperature_subscriber_node ../../workspaces/temperature_subscriber_ws/src/temperature_subscriber_node.cpp)
-ament_target_dependencies(temperature_subscriber_node rclcpp temperature_monitoring_interfaces)
-
-install(TARGETS temperature_subscriber_node
-  DESTINATION lib/${PROJECT_NAME})
+install(DIRECTORY launch
+  DESTINATION share/${PROJECT_NAME}
+)
 
 # if(BUILD_TESTING)
 #   find_package(ament_lint_auto REQUIRED)

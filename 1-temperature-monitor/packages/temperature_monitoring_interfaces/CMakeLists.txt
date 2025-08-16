@@ -17,20 +17,19 @@ foreach(Dependency IN ITEMS ${THIS_PACKAGE_INCLUDE_DEPENDS})
 endforeach()
 
 set(msg_files
-  msg/DummyMsg.msg
+  msg/TemperatureData.msg
 )
 
 set(action_files
 )
 
 set(srv_files
-  srv/DummySrv.srv
+  #srv/TemperatureConverter.srv
 )
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   ${msg_files}
-  ${srv_files}
-  ${action_files}
+  # ${srv_files}
   DEPENDENCIES builtin_interfaces ${THIS_PACKAGE_INCLUDE_DEPENDS}
   ADD_LINTER_TESTS
 )
