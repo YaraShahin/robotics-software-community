@@ -18,7 +18,7 @@ setup(
     tests_require=["pytest"],
     entry_points={
         "console_scripts": [
-            "temperature_publisher_node = temperature_publisher.temperature_publisher:main"
+            "temperature_publisher_node = temperature_publisher.temperature_publisher_node:main"
         ],
     },
 )

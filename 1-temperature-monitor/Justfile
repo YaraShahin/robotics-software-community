@@ -11,7 +11,7 @@ setup-project:
 
     mkdir -p $PWD/{{SUBSCRIBER_WS_SRC}}
 
-    docker compose up -d --build
+    docker compose up -d --build 
 
     docker compose exec {{PUBLISHER_CONTAINER}} bash -c "\
         cd /root/temperature_publisher_ws && \

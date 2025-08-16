@@ -19,7 +19,7 @@ services:
     container_name: temperature_publisher
     volumes:
       - ./workspaces/temperature_publisher_ws:/root/temperature_publisher_ws:rw
-      - ./packages:/root/temperature_publisher_ws/src:r
+      - ./packages:/root/temperature_publisher_ws/src:ro
 
   temperature_subscriber:
     <<: *temperature-monitoring-service
@@ -30,7 +30,7 @@ services:
     container_name: temperature_subscriber
     volumes:
       - ./workspaces/temperature_subscriber_ws:/root/temperature_subscriber_ws:rw
-      - ./packages:/root/temperature_subscriber_ws/src:r
+      - ./packages:/root/temperature_subscriber_ws/src:ro
 
 networks:
   temperature-monitoring-network:

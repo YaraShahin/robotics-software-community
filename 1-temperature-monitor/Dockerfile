@@ -33,10 +33,11 @@ RUN python_version=$(python3 -c "import sys; print(f'{sys.version_info.major}.{s
 RUN pip3 install -U -I pre-commit
 RUN rm -rf /var/lib/apt/lists/*
 
-WORKDIR /root/${WS_NAME}/src
+WORKDIR /root/${WS_NAME}
 
 # Source ROS 2 setup in bash shells
 RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> /root/.bashrc && \
-    echo "source /root/${WS_NAME}/install/setup.bash" >> /root/.bashrc
+    echo "source /root/${WS_NAME}/install/setup.bash" >> /root/.bashrc && \
+    export RCUTILS_COLORIZED_OUTPUT=1
 
 CMD ["/bin/bash"]
