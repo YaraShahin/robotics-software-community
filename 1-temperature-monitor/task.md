@@ -88,7 +88,3 @@ By completing this exercise, students will:
 - Error handling and robustness
 - Documentation and comments
 - Advanced features implementation
-
-## Resources used
-
-- Folder structure: https://github.com/WATonomous/wato_monorepo/blob/main/docs/monorepo.md

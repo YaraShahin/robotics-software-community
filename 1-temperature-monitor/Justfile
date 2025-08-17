@@ -11,23 +11,43 @@ setup-project:
 
     mkdir -p $PWD/{{SUBSCRIBER_WS_SRC}}
 
-    docker compose up -d --build 
+    docker compose build --no-cache
+    docker compose up -d
 
     docker compose exec {{PUBLISHER_CONTAINER}} bash -c "\
         cd /root/temperature_publisher_ws && \
         rosdep update && \
         rosdep install --from-paths src --ignore-src -r -y && \
-        colcon build --symlink-install && \
-        source install/setup.bash \
+        echo 'cd /root/temperature_publisher_ws' >> ~/.bashrc && \
+        echo 'colcon build --symlink-install' >> ~/.bashrc && \
+        echo 'source /root/temperature_publisher_ws/install/setup.bash' >> ~/.bashrc && \
+        source ~/.bashrc \
     "
 
     docker compose exec {{SUBSCRIBER_CONTAINER}} bash -c "\
         cd /root/temperature_subscriber_ws && \
         rosdep update && \
         rosdep install --from-paths src --ignore-src -r -y && \
-        colcon build --symlink-install && \
-        source install/setup.bash \
+        echo 'cd /root/temperature_subscriber_ws' >> ~/.bashrc && \
+        echo 'colcon build --symlink-install' >> ~/.bashrc && \
+        echo 'source /root/temperature_subscriber_ws/install/setup.bash' >> ~/.bashrc && \
+        source ~/.bashrc \
     "
+
+run-project:
+    docker compose up -d
+    docker compose exec -d {{PUBLISHER_CONTAINER}} bash -ic "\
+        source ~/.bashrc && \
+        ros2 run temperature_publisher temperature_publisher_node \
+    "
+    docker compose logs -f {{PUBLISHER_CONTAINER}} &
+
+    docker compose exec -d {{SUBSCRIBER_CONTAINER}} bash -ic "\
+        source ~/.bashrc && \
+        ros2 run temperature_subscriber temperature_subscriber_node \
+    "
+    docker compose logs -f {{SUBSCRIBER_CONTAINER}} &
+
 
 # Command: Open publisher container shell
 run-publisher:

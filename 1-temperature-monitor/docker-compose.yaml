@@ -8,14 +8,13 @@ x-temperature-monitoring-service: &temperature-monitoring-service
   environment:
     - DEBIAN_FRONTEND=noninteractive
     - ROS_DOMAIN_ID=33
+    - RCUTILS_COLORIZED_OUTPUT=1
 
 services:
   temperature_publisher:
     <<: *temperature-monitoring-service
     build:
       context: .
-      args:
-        ws_name: temperature_publisher_ws/
     container_name: temperature_publisher
     volumes:
       - ./workspaces/temperature_publisher_ws:/root/temperature_publisher_ws:rw
@@ -25,8 +24,6 @@ services:
     <<: *temperature-monitoring-service
     build:
       context: .
-      args:
-        ws_name: temperature_subscriber_ws/
     container_name: temperature_subscriber
     volumes:
       - ./workspaces/temperature_subscriber_ws:/root/temperature_subscriber_ws:rw

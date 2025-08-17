@@ -17,3 +17,7 @@
     c. Optional: `colcon build --symlink-install && source install/setup.bash`: If you made changes in source code and want to rebuild
     d. `ros2 run `
 
+
+## Resources used
+
+- Folder structure: https://github.com/WATonomous/wato_monorepo/blob/main/docs/monorepo.md
