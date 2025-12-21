@@ -2,12 +2,18 @@
 import rclpy
 from rclpy.node import Node 
 from temperature_monitoring_interfaces.msg import TemperatureData 
-import random
+from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy, DurabilityPolicy
 import math
  
 class TemperaturePublisherNode(Node): 
     def __init__(self):
         super().__init__("temperature_publisher_node")
+        qos_profile = QoSProfile(
+            reliability=ReliabilityPolicy.BEST_EFFORT,
+            durability=DurabilityPolicy.TRANSIENT_LOCAL,
+            history=HistoryPolicy.KEEP_LAST,
+            depth=1
+        )
 
         self.declare_parameter("publishing_frequency", 1.0)
         self.declare_parameter("temperature_range", [20.0, 30.0])
@@ -22,7 +28,7 @@ class TemperaturePublisherNode(Node):
         self.sensor_id = self.get_parameter("sensor_id").value
         self.get_logger().info(f"Sensor ID set to {self.sensor_id}")
 
-        self.publisher_ = self.create_publisher(TemperatureData, 'temperature', 1)
+        self.publisher_ = self.create_publisher(TemperatureData, 'temperature', qos_profile)
         self.timer = self.create_timer(self.frequency, self.publish_temperature)
         self.get_logger().info("Publisher Node has been started")
 

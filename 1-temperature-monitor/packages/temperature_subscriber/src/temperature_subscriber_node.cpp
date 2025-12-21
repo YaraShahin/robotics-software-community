@@ -12,8 +12,20 @@ class subscriberNode : public rclcpp::Node
 public:
     subscriberNode() : Node("temperature_subscriber_node")
     {
+        static const rmw_qos_profile_t qos_services = {
+            RMW_QOS_POLICY_HISTORY_KEEP_LAST,
+            1,  // message queue depth
+            RMW_QOS_POLICY_RELIABILITY_BEST_EFFORT,
+            RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL,
+            RMW_QOS_DEADLINE_DEFAULT,
+            RMW_QOS_LIFESPAN_DEFAULT,
+            RMW_QOS_POLICY_LIVELINESS_SYSTEM_DEFAULT,
+            RMW_QOS_LIVELINESS_LEASE_DURATION_DEFAULT,
+            false};
+
         subscriber_ = this->create_subscription<temperature_monitoring_interfaces::msg::TemperatureData>(
-            "temperature", 10,
+            "temperature",
+            rclcpp::QoS(rclcpp::QoSInitialization::from_rmw(qos_services), qos_services),
             std::bind(&subscriberNode::getTemperature, this, _1)
         );
         RCLCPP_INFO(this->get_logger(), "subscriber Node has been started");
