@@ -56,9 +56,9 @@ By completing this exercise, students will:
 
 ### Bonus Task: Challenges
 1. Add a third container with a web-based visualization (ROS2 bridge to WebSocket)
-2. Implement data persistence using a database container
-3. Create unit tests for both nodes
-4. Add performance monitoring and metrics collection
+2. Implement data persistence using a database container [Missing]
+3. Create unit tests for both nodes [Missing]
+4. Add performance monitoring and metrics collection [Missing]
 
 ## Hints and Guidelines
 

@@ -21,3 +21,10 @@
 ## Resources used
 
 - Folder structure: https://github.com/WATonomous/wato_monorepo/blob/main/docs/monorepo.md
+
+# TODO
+
+- Communication (QoS settings, check DDS ports and discovery, RMW_IMPLEMENTATION, `ros2 multicast receive/send`)
+- Add a third container with a web-based visualization (ROS2 bridge to WebSocket)
+- Consider time synchronization between containers
+- docs
