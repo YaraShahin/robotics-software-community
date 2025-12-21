@@ -2,7 +2,7 @@ x-temperature-monitoring-service: &temperature-monitoring-service
   image: ros2-humble-temperature-monitoring-dev
   networks:
     - temperature-monitoring-network
-Justfile   tty: true
+  tty: true
   stdin_open: true
   environment:
     - DEBIAN_FRONTEND=noninteractive
