@@ -30,8 +30,10 @@ RUN python_version=$(python3 -c "import sys; print(f'{sys.version_info.major}.{s
 RUN pip3 install -U -I pre-commit
 RUN rm -rf /var/lib/apt/lists/*
 
+COPY ./entrypoint.sh /entrypoint.sh
+
 # Source ROS 2 setup in bash shells
 RUN echo "source /opt/ros/humble/setup.bash" >> /root/.bashrc && \
     source ~/.bashrc
 
-CMD ["/bin/bash"]
+ENTRYPOINT [ "bash", "/entrypoint.sh" ]

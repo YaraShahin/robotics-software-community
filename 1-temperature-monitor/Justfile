@@ -8,46 +8,13 @@ SUBSCRIBER_WS_SRC := "workspaces/temperature_subscriber_ws/src"
 # Note: in symlink command, you must give always the FULL PATH not relative
 setup-project:
     mkdir -p $PWD/{{PUBLISHER_WS_SRC}}
-
     mkdir -p $PWD/{{SUBSCRIBER_WS_SRC}}
 
-    docker compose build --no-cache
+    docker compose build
     docker compose up -d
-
-    docker compose exec {{PUBLISHER_CONTAINER}} bash -c "\
-        cd /root/temperature_publisher_ws && \
-        rosdep update && \
-        rosdep install --from-paths src --ignore-src -r -y && \
-        echo 'cd /root/temperature_publisher_ws' >> ~/.bashrc && \
-        echo 'colcon build --symlink-install' >> ~/.bashrc && \
-        echo 'source /root/temperature_publisher_ws/install/setup.bash' >> ~/.bashrc && \
-        source ~/.bashrc \
-    "
-
-    docker compose exec {{SUBSCRIBER_CONTAINER}} bash -c "\
-        cd /root/temperature_subscriber_ws && \
-        rosdep update && \
-        rosdep install --from-paths src --ignore-src -r -y && \
-        echo 'cd /root/temperature_subscriber_ws' >> ~/.bashrc && \
-        echo 'colcon build --symlink-install' >> ~/.bashrc && \
-        echo 'source /root/temperature_subscriber_ws/install/setup.bash' >> ~/.bashrc && \
-        source ~/.bashrc \
-    "
 
 run-project:
-    docker compose up -d
-    docker compose exec -d {{PUBLISHER_CONTAINER}} bash -ic "\
-        source ~/.bashrc && \
-        ros2 run temperature_publisher temperature_publisher_node \
-    "
-    docker compose logs -f {{PUBLISHER_CONTAINER}} &
-
-    docker compose exec -d {{SUBSCRIBER_CONTAINER}} bash -ic "\
-        source ~/.bashrc && \
-        ros2 run temperature_subscriber temperature_subscriber_node \
-    "
-    docker compose logs -f {{SUBSCRIBER_CONTAINER}} &
-
+    docker compose up  --attach {{PUBLISHER_CONTAINER}} --attach {{SUBSCRIBER_CONTAINER}}
 
 # Command: Open publisher container shell
 run-publisher:

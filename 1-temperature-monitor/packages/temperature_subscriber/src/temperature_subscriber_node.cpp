@@ -10,7 +10,7 @@ using namespace std::placeholders;
 class subscriberNode : public rclcpp::Node
 {
 public:
-    subscriberNode() : Node("subscriber_node")
+    subscriberNode() : Node("temperature_subscriber_node")
     {
         subscriber_ = this->create_subscription<temperature_monitoring_interfaces::msg::TemperatureData>(
             "temperature", 10,
