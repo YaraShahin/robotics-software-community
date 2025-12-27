@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Launch your ROS2 node -->
+  <node pkg="temperature_subscriber" exec="temperature_subscriber_node" name="temperature_subscriber" output="screen"/>
+</launch>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Launch your ROS2 node -->
+  <node pkg="temperature_publisher" exec="temperature_publisher_node" name="temperature_publisher" output="screen"/>
+
+  <!-- Launch Foxglove Bridge -->
+  <include file="$(find-pkg-share foxglove_bridge)/launch/foxglove_bridge_launch.xml">
+    <arg name="port" value="8765"/>
+  </include>
+</launch>

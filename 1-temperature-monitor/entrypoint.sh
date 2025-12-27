@@ -6,11 +6,11 @@ source /opt/ros/humble/setup.bash
 if [ -d "/root/temperature_publisher_ws" ]; then
     WORKSPACE="/root/temperature_publisher_ws"
     PACKAGE="temperature_publisher"
-    NODE="temperature_publisher_node"
+    LAUNCH_FILE="temperature_publisher.launch.xml"
 elif [ -d "/root/temperature_subscriber_ws" ]; then
     WORKSPACE="/root/temperature_subscriber_ws"
     PACKAGE="temperature_subscriber"
-    NODE="temperature_subscriber_node"
+    LAUNCH_FILE="temperature_subscriber.launch.xml"
 else
     echo "No workspace found!"
     exit 1
@@ -20,6 +20,7 @@ cd $WORKSPACE
 
 # Build workspace
 echo "Building workspace..."
+apt update
 rosdep update
 rosdep install --from-paths src --ignore-src -r -y
 colcon build --symlink-install --packages-up-to $PACKAGE
@@ -28,4 +29,4 @@ colcon build --symlink-install --packages-up-to $PACKAGE
 source $WORKSPACE/install/setup.bash
 
 # Run the node
-exec ros2 run $PACKAGE $NODE
+exec ros2 launch $PACKAGE $LAUNCH_FILE
